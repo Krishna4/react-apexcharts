@@ -42,7 +42,10 @@ export default class Charts extends Component {
 
     return ApexCharts.merge(options, newOptions);
   }
-
+componentWillReceiveProps(nextProps){
+  
+    this.chart.updateOptions(this.getConfig());
+}
   componentDidUpdate(prevProps) {
     if (!this.chart) return null;
     const { options, series } = this.props;
@@ -64,6 +67,8 @@ export default class Charts extends Component {
         this.chart.updateOptions(this.getConfig());
       }
     }
+    //Workaroudn for update chart every event
+    this.chart.updateSeries(series);
   }
 
   componentWillUnmount() {
